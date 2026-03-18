@@ -4,21 +4,30 @@ import java.util.List;
 
 public class FonteDeDados{
     private List<Integer> lst;
+    private List<Observador> observadores;
 
     public FonteDeDados(){
         lst = new LinkedList<>();
+        observadores = new ArrayList<>();
     }
 
     public void add(Integer value){
         if (value < 0) throw new IllegalArgumentException("Valor invalido");
         lst.add(value);
+        notificar();
     }
 
-    public int quantidade(){
-        return lst.size();
+    public void addObservador(Observador o){
+        observadores.add(o);
     }
 
-    public List<Integer> getValores(){
-        return new ArrayList<>(lst);
+    public void removeObservador(Observador o){
+        observadores.remove(o);
+    }
+
+    private void notificar(){
+        for (Observador o : observadores){
+            o.att(new ArrayList<>());
+        }
     }
 }
