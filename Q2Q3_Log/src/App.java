@@ -1,11 +1,17 @@
 public class App {
-    public static void main(String[] args) throws Exception {
-        LogSimples log = new LogSimples();
-        log.log("Mensagem de alerta 1");
-        log.log("Mensagem de alarme 23");
-        log.log("Mensagem de PANICO!!");
+    public static void main(String[] args) {
+        LogSimples logger = LogSimples.getInstance();
+        
+        logger.log("Iniciando sistema parte do Fabricio");
+        logger.log("Verificando padrões de projeto...");
 
-        for(String m:log){
+        LogSimples outroAcesso = LogSimples.getInstance();
+        outroAcesso.log("Finalizando tarefa!");
+
+        System.out.println("As instâncias são iguais? " + (logger == outroAcesso));
+        System.out.println("Mensagens no Log Único");
+        
+        for (String m : logger) {
             System.out.println(m);
         }
     }
